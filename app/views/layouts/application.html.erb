@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+       <a class="navbar-brand" href="/">
+         <span>Bookers</span>
+       </a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+       <div class="collapse navbar-collapse" id="navbarNavDropdown">
+         <ul class="navbar-nav ml-auto">
+       <% if user_signed_in? %>
+        <li>
+          <%= link_to user_path(current_user), class:'navbar-brand' do %>
+           <i class="fas fa-home">Home</i>
+          <% end  %>
+        </li>
+        <li>
+          <%= link_to users_path,class:"navbar-brand" do %>
+           <i class="fas fa-users navbar-brand">Users</i>
+          <% end  %>
+        </li>
+        <li>
+
+          <%= link_to books_path, class:'navbar-brand' do %>
+           <i class="fas fa-book-open navbar-brand">Books</i>
+          <% end  %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'navbar-brand' do  %>
+           <i class="fas fa-sign-out-alt navbar-brand">logout</i>
+          <% end  %>
+        </li>
+
+
+
+       <% else %>
+        <li>
+          <%= link_to "/", class:'navbar-brand' do %>
+           <i class="fas fa-home navbar-brand">Home</i>
+          <% end  %>
+        </li>
+        <li>
+          <%= link_to "/home/about", class:'navbar-brand' do %>
+           <i class="fas fa-link navbar-brand">About</i>
+          <% end  %>
+        </li>
+        <li>
+          <%= link_to "/users/sign_up", class:'navbar-brand' do %>
+           <i class="fas fa-user-plus navbar-brand">sign up</i>
+          <% end  %>
+        </li>
+        <li>
+          <%= link_to "/users/sign_in", class:'navbar-brand' do %>
+           <i class="fas fa-sign-in-alt navbar-brand">login</i>
+          <% end  %>
+        </li>
+       <% end %>
+       </div>
+      </div>
+    </header>
+
+  <% if flash[:notice] %>
+    <div class="flash">
+         <%= flash[:notice] %>
+    </div>
+<% end %>
+
+
+
+    <%= yield %>
+  </body>
+  <footer>
+    <div class="container mt-5">
+    <div class="row">
+      <div class="mx-auto">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+    </div>
+  </footer>
+</html>
